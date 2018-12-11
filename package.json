@@ -13,7 +13,7 @@
     "homepage": "http://gselvamary.github.io/MERN_Apps",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "build": "npm build --prefix client"
+    "build": "npm run build --prefix client"
   },
   "author": "",
   "license": "ISC",
