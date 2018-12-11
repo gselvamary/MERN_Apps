@@ -1,15 +1,16 @@
 const express = require('express');
-const mongoose = require('mongoose');
+
 const bodyParser = require('body-parser');
 const path = require('path');
 
 
 // this is our MongoDB database
-const dbRoute = "mongodb://localhost:27017/test3";
+//const dbRoute = "mongodb://localhost:27017/test3";
 const app = express();
 
 const users = require('./routes/user/info');
-
+const mongoose = require('./config/keys')
+/*
 // connects our back end code with the database
 mongoose.connect(
   dbRoute,
@@ -23,7 +24,7 @@ db.once("open", () => console.log(`Connected to the Database ${dbRoute}`));
 // checks if connection with the database is successful
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
-
+*/
 
 
 app.use(bodyParser.json());
