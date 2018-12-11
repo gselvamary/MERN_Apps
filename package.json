@@ -12,7 +12,8 @@
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client",
     "homepage": "http://gselvamary.github.io/MERN_Apps",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build",
+    "build": "npm build --prefix client"
   },
   "author": "",
   "license": "ISC",
