@@ -6,7 +6,7 @@ const path = require('path');
 
 
 // this is our MongoDB database
-//const dbRoute = "mongodb://localhost:27017/test3";
+//const dbRoute = "mongodb://127.0.0.1:27017/test3";
 const app = express();
 
 const users = require('./routes/user/info');
