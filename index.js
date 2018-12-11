@@ -1,4 +1,5 @@
 const express = require('express');
+const mongoose = require('mongoose');
 
 const bodyParser = require('body-parser');
 const path = require('path');
@@ -9,7 +10,7 @@ const path = require('path');
 const app = express();
 
 const users = require('./routes/user/info');
-const mongoose = require('./config/keys')
+const connect = require('./config/keys');
 /*
 // connects our back end code with the database
 mongoose.connect(
@@ -25,7 +26,6 @@ db.once("open", () => console.log(`Connected to the Database ${dbRoute}`));
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
 */
-
 
 app.use(bodyParser.json());
 
