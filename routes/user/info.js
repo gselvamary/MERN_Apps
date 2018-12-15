@@ -6,7 +6,7 @@ const User = require('../../models/user');
 
 router.get('/', (req, res) => {
   User.find()
-    .sort({ regno: -1 })
+    .sort({ regno: 1 })
     .then(users => res.json(users));
 });
 
@@ -27,12 +27,67 @@ router.post('/', (req, res) => {
 });
 
 
-router.delete('/:id', (req, res) => {
-  User.findById(req.params.id)
+router.delete('/:regno', (req, res) => {
+  console.log(req.params.regno);
+  User.findOne({ regno: req.params.regno })
     .then(user => user.remove()
       .then(() => res.json({ success: true })))
     .catch(err => res.status(404).json({ success: false }));
 });
 
+
+router.get('/verify/:regno', (req, res) => {
+  User.findOne({ regno: req.params.regno })
+    .then(user => {
+      res.json(user)
+    })
+    .catch(err => console.log("No such user"));
+});
+
+
+
+
 module.exports = router;
+
+
+/*
+componentDidMount() {
+    const obj = getFromStorage('the_main_app');
+    if (obj && obj.token) {
+      const { token } = obj;
+      // Verify token
+      fetch('/api/account/verify?token=' + token)
+        .then(res => res.json())
+        .then(json => {
+          if (json.success) {
+            this.setState({
+              token,
+              isLoading: false
+            });
+          } else {
+            this.setState({
+              isLoading: false,
+            });
+          }
+        });
+    } else {
+      this.setState({
+        isLoading: false,
+      });
+    }
+  }
+*/
+
+/* update example
+
+router.route('/update')
+.post(function(req, res) {
+ const doc = {
+     description: req.body.description,
+     amount: req.body.amount,
+     month: req.body.month,
+     year: req.body.year
+ };
+
+*/
 

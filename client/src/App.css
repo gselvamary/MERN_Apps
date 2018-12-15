@@ -5,6 +5,7 @@
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 40vmin;
+  -webkit-animation: App-logo-spin infinite 20s linear;
 }
 
 .App-header {
@@ -29,4 +30,27 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.centered {
+  margin-top: 5%;
+  margin-left: 10%;
+  margin-right: 20%;
+  background-origin: padding-box;
+  border-block-end-color: black;
+}
+
+.navbarbutton {
+  float: right;
+  margin-left: 25%;
+  text-decoration-color: white;
+}
+
+.root {
+  flex-grow: 1;
+  display: 'flex';
+}
+
+.menuButton {
+  margin-left: 25%,
 }

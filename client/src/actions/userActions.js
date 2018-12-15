@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GET_USERS, REGISTER_USER, DELETE_USER, USERS_LOADING } from './types';
+import { GET_USERS, REGISTER_USER, DELETE_USER, USERS_LOADING, VERIFY_USER } from './types';
 
 export const getUsers = () => dispatch => {
     dispatch(setUsersLoading());
@@ -8,7 +8,9 @@ export const getUsers = () => dispatch => {
             type: GET_USERS,
             payload: res.data
         })
-    );
+
+    )
+    .catch(reject => console.log("Error in fetching"));
 };
 
 export const registerUser = user => dispatch => {
@@ -20,11 +22,11 @@ export const registerUser = user => dispatch => {
     );
 };
 
-export const deleteUser = id => dispatch => {
-    axios.delete(`/users/${id}`).then(res =>
+export const deleteUser = regno => dispatch => {
+    axios.delete(`/users/${regno}`).then(res =>
         dispatch({
             type: DELETE_USER,
-            payload: id
+            payload: regno
         })
     );
 };
@@ -33,4 +35,14 @@ export const setUsersLoading = () => {
     return {
         type: USERS_LOADING
     };
+};
+
+export const fetchUser = regno => dispatch => {
+        axios.get(`/users/verify/${regno}`)
+            .then(res => 
+                dispatch({
+                    type: VERIFY_USER,
+                    payload: res.data
+                }))
+            .catch(reject => console.log("Error in fetching"));
 };

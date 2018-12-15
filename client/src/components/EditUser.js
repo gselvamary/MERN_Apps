@@ -62,10 +62,10 @@ class Register extends Component {
         alert("User Registration is Successful");
 
     };
-   /* toGetdetails = e => {
+    toGetdetails = e => {
        this.props.fetchUser(e);
     };
-*/
+
 
 
     /* componentDidMount() {
@@ -195,22 +195,24 @@ class Register extends Component {
                 </Card>
 
                 <br></br>
+
+                <br></br>
+                <Row></Row>
+                <Card>
+                    <CardBody>
+                        <Row>
+                            <Col xs="6">
+                                <Input type="text" name="regno11" id="regno11" placeholder="Enter Regno for Details" onChange={this.handleChange} />
+                            </Col>  <Col xs="6"><Button color="primary" style={{ marginBottom: '2rem' }} onClick={this.toGetdetails.bind(this, this.state.regno11)}>Get Details</Button>
+                            </Col>
+                        </Row>
+                    </CardBody>
+                </Card>
+
                 <br></br>
                 <br></br>
-                <ListGroup>
-                    {users.map(({ _id, regno, fname }) => (
-                        <ListGroupItemHeading key={_id}>
-                            <ListGroupItem>
-                                <Button className="remove-btn" color="danger" size="sm"
-                                    onClick={this.onDeleteClick.bind(this, regno)}
-                                >
-                                    &times;
-                                    </Button>
-                                {regno} - {fname}
-                            </ListGroupItem>
-                        </ListGroupItemHeading>
-                    ))}
-                </ListGroup>
+                <br></br>
+
                 <br></br>
                 <br></br>
             </Container >
@@ -241,6 +243,19 @@ export default connect(
 
 
 /*
-         
+           <ListGroup>
+                    {users.map(({ _id, regno, fname }) => (
+                        <ListGroupItemHeading key={_id}>
+                            <ListGroupItem>
+                                <Button className="remove-btn" color="danger" size="sm"
+                                    onClick={this.onDeleteClick.bind(this, regno)}
+                                >
+                                    &times;
+                                    </Button>
+                                {regno} - {fname}
+                            </ListGroupItem>
+                        </ListGroupItemHeading>
+                    ))}
+                </ListGroup>
 
     */
