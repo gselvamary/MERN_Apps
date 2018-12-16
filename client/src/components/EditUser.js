@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { Container, Card, CardBody, Button, Form, FormGroup, Input, Label, ListGroup, ListGroupItem, ListGroupItemHeading, Row, Col, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import { connect } from 'react-redux';
-import { getUsers, deleteUser, registerUser, fetchUser } from '../actions/userActions';
+import { fetchUser, updateUser } from '../actions/userActions';
 import { getDepts } from '../actions/deptActions';
 import PropTypes from 'prop-types';
 
-class Register extends Component {
+class EditUser extends Component {
     state = {
         dropdownOpen: false,
         visible: true,
@@ -44,55 +44,10 @@ class Register extends Component {
         });
     };
 
-
-    onSubmit = e => {
-        e.preventDefault();
-
-        const newUser = {
-            regno: this.state.regno,
-            fname: this.state.fname,
-            lname: this.state.lname,
-            password: this.state.password,
-            dept_id: this.state.dept_id,
-            email: this.state.email,
-            mobile: this.state.mobile,
-        }
-        //Add user  via registerUser:
-        this.props.registerUser(newUser);
-        alert("User Registration is Successful");
-
-    };
     toGetdetails = e => {
        this.props.fetchUser(e);
     };
 
-
-
-    /* componentDidMount() {
- const obj = getFromStorage('the_main_app');
- if (obj && obj.token) {
-   const { token } = obj;
-   // Verify token
-   fetch('/api/account/verify?token=' + token)
-     .then(res => res.json())
-     .then(json => {
-       if (json.success) {
-         this.setState({
-           token,
-           isLoading: false
-         });
-       } else {
-         this.setState({
-           isLoading: false,
-         });
-       }
-     });
- } else {
-   this.setState({
-     isLoading: false,
-   });
- }
-}  */ //alert(id);
 
     onDeleteClick = id => {
         this.props.deleteUser(id);
@@ -238,8 +193,8 @@ const mapStateToProps = state => ({
 
 export default connect(
     mapStateToProps,
-    { getUsers, deleteUser, registerUser, getDepts, fetchUser }
-)(Register);
+    { getUsers, deleteUser, getDepts, fetchUser }
+)(EditUser);
 
 
 /*

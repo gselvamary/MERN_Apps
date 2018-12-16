@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Container, Card, CardBody, Button, Form, FormGroup, Input, Label, ListGroup, ListGroupItem, ListGroupItemHeading, Row, Col, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import { connect } from 'react-redux';
-import { getUsers, deleteUser, registerUser, fetchUser } from '../actions/userActions';
+import { getUsers, deleteUser, registerUser } from '../actions/userActions';
 import { getDepts } from '../actions/deptActions';
 import PropTypes from 'prop-types';
 
@@ -9,9 +9,7 @@ class Register extends Component {
     state = {
         dropdownOpen: false,
         visible: true,
-        deptname: 'Select Your Department',
-        regno11: '',
-
+        deptname: 'Select Your Department'
     };
     componentDidMount() {
         this.props.getUsers();
@@ -62,38 +60,6 @@ class Register extends Component {
         alert("User Registration is Successful");
 
     };
-   /* toGetdetails = e => {
-       this.props.fetchUser(e);
-    };
-*/
-
-
-    /* componentDidMount() {
- const obj = getFromStorage('the_main_app');
- if (obj && obj.token) {
-   const { token } = obj;
-   // Verify token
-   fetch('/api/account/verify?token=' + token)
-     .then(res => res.json())
-     .then(json => {
-       if (json.success) {
-         this.setState({
-           token,
-           isLoading: false
-         });
-       } else {
-         this.setState({
-           isLoading: false,
-         });
-       }
-     });
- } else {
-   this.setState({
-     isLoading: false,
-   });
- }
-}  */ //alert(id);
-
     onDeleteClick = id => {
         this.props.deleteUser(id);
 
@@ -226,7 +192,7 @@ Register.propTypes = {
     deleteUser: PropTypes.func.isRequired,
     registerUser: PropTypes.func.isRequired,
     getDepts: PropTypes.func.isRequired,
-    fetchUser: PropTypes.func.isRequired,
+   
 };
 
 const mapStateToProps = state => ({
@@ -236,7 +202,7 @@ const mapStateToProps = state => ({
 
 export default connect(
     mapStateToProps,
-    { getUsers, deleteUser, registerUser, getDepts, fetchUser }
+    { getUsers, deleteUser, registerUser, getDepts }
 )(Register);
 
 

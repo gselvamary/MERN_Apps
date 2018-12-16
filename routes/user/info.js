@@ -36,7 +36,7 @@ router.delete('/:regno', (req, res) => {
 });
 
 
-router.get('/verify/:regno', (req, res) => {
+router.get('/:regno', (req, res) => {
   User.findOne({ regno: req.params.regno })
     .then(user => {
       res.json(user)
@@ -44,8 +44,28 @@ router.get('/verify/:regno', (req, res) => {
     .catch(err => console.log("No such user"));
 });
 
+router.patch('/:regno', (req, res) => {
+  User.findOne({ regno: req.params.regno })
+  .then(res => res.json())
+  .then(json => {
+    if (json.success) {
+      this.setState({
+        fname: req.body.fname,
+        lname: req.body.lname,
+        password: req.body.password,
+        dept_id: req.body.dept_id,
+        email: req.body.email,
+        mobile: req.body.mobile
+      });
+      user.save();
+    }
+    else 
+      console.log("Update failed");
+    })
+  .catch(err => console.log("No such user"));
+});
 
-
+//https://www.toptal.com/nodejs/secure-rest-api-in-nodejs
 
 module.exports = router;
 

@@ -3,7 +3,8 @@ import {
   GET_USERS,
   DELETE_USER,
   USERS_LOADING,
-  VERIFY_USER
+  VERIFY_USER,
+  UPDATE_USER
 } from '../actions/types';
 
 const initialState = {
@@ -43,6 +44,11 @@ export default function (state = initialState, action) {
         ...state,
         users: action.payload,
         loading: false
+      };
+      case UPDATE_USER:
+      return {
+        ...state,
+        users: [action.payload, ...state.users]
       };
     default:
       return state;
