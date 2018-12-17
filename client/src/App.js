@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
+
 import AppNavbar from './components/AppNavbar';
-import Register from './components/Register';
+
+import Home from './components/Home';
+
+
+
 import { Container } from 'reactstrap';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -13,15 +18,17 @@ import store from './store';
 
 class App extends Component {
   render() {
+    const { children } = this.props;
     return (
       <Provider store={store}>
-      <div className="App" > 
-     <Container>
-       <AppNavbar />
-       <Register />
-     </Container>
+        <div className="App" >
+          <Container>
+            <AppNavbar />
+            <Home></Home>
+            {children}
+          </Container>
 
-      </div>
+        </div>
       </Provider>
     );
   }

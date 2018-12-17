@@ -44,70 +44,38 @@ router.get('/:regno', (req, res) => {
     .catch(err => console.log("No such user"));
 });
 
+
+
+
+//update
+
+/*this to verify which value do we get in user and in req... put it in before for loop
+// console.log(req.params.regno);
+// console.log(req.body.fname);
+ // console.log(user.fname); */
+
+/* this code expects every data   place it instead of for loop
+user.fname = req.body.fname;
+  user.lname = req.body.lname;
+user.password = req.body.password;
+user.dept_id = req.body.dept_id;
+user.email = req.body.email;
+user.mobile = req.body.mobile;  */
+// Reference :  https://www.toptal.com/nodejs/secure-rest-api-in-nodejs
+
 router.patch('/:regno', (req, res) => {
   User.findOne({ regno: req.params.regno })
-  .then(res => res.json())
-  .then(json => {
-    if (json.success) {
-      this.setState({
-        fname: req.body.fname,
-        lname: req.body.lname,
-        password: req.body.password,
-        dept_id: req.body.dept_id,
-        email: req.body.email,
-        mobile: req.body.mobile
-      });
-      user.save();
-    }
-    else 
-      console.log("Update failed");
-    })
-  .catch(err => console.log("No such user"));
+    .then(user => {
+      // this updates only given data
+      for (let i in req.body) {
+        user[i] = req.body[i];
+      }
+      user.save()
+        .then(user => {
+          res.json(user)
+        })
+        .catch(err => console.log("Update Failed"));
+    });
 });
 
-//https://www.toptal.com/nodejs/secure-rest-api-in-nodejs
-
 module.exports = router;
-
-
-/*
-componentDidMount() {
-    const obj = getFromStorage('the_main_app');
-    if (obj && obj.token) {
-      const { token } = obj;
-      // Verify token
-      fetch('/api/account/verify?token=' + token)
-        .then(res => res.json())
-        .then(json => {
-          if (json.success) {
-            this.setState({
-              token,
-              isLoading: false
-            });
-          } else {
-            this.setState({
-              isLoading: false,
-            });
-          }
-        });
-    } else {
-      this.setState({
-        isLoading: false,
-      });
-    }
-  }
-*/
-
-/* update example
-
-router.route('/update')
-.post(function(req, res) {
- const doc = {
-     description: req.body.description,
-     amount: req.body.amount,
-     month: req.body.month,
-     year: req.body.year
- };
-
-*/
-

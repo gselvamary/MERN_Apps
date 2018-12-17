@@ -45,10 +45,10 @@ export default function (state = initialState, action) {
         users: action.payload,
         loading: false
       };
-      case UPDATE_USER:
+    case UPDATE_USER:
       return {
         ...state,
-        users: [action.payload, ...state.users]
+        users: [action.payload]
       };
     default:
       return state;

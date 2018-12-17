@@ -51,8 +51,8 @@ export const updateUser = regno => dispatch => {
     axios.patch(`/users/${regno}`)
         .then(res => 
             dispatch({
-                type: VERIFY_USER,
+                type: UPDATE_USER,
                 payload: res.data
             }))
-        .catch(reject => console.log("Error in fetching"));
+        .catch(reject => console.log("Error in updating"));
 };

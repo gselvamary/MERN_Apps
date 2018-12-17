@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { getUsers, deleteUser, registerUser } from '../actions/userActions';
 import { getDepts } from '../actions/deptActions';
 import PropTypes from 'prop-types';
+import { Link } from "react-router-dom";
 
 class Register extends Component {
     state = {
@@ -157,7 +158,10 @@ class Register extends Component {
 
                     <Row>   </Row>
                     <Button color="dark" style={{ marginBottom: '2rem' }} onClick={this.onSubmit}>Register</Button>
-
+                    <Row>   </Row>
+                    <Link style={{ textDecoration: 'none' }} to="/EditUser" >
+                        <Button color="dark" style={{ marginBottom: '2rem' }} >Edit Profile</Button>
+                    </Link>
                 </Card>
 
                 <br></br>
@@ -192,7 +196,7 @@ Register.propTypes = {
     deleteUser: PropTypes.func.isRequired,
     registerUser: PropTypes.func.isRequired,
     getDepts: PropTypes.func.isRequired,
-   
+
 };
 
 const mapStateToProps = state => ({
@@ -207,6 +211,6 @@ export default connect(
 
 
 /*
-         
+
 
     */
