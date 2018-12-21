@@ -63,11 +63,13 @@ user.email = req.body.email;
 user.mobile = req.body.mobile;  */
 // Reference :  https://www.toptal.com/nodejs/secure-rest-api-in-nodejs
 
-router.patch('/:regno', (req, res) => {
-  User.findOne({ regno: req.params.regno })
+router.patch('/', (req, res) => {
+  console.log(req.body);
+  User.findOne({ regno: req.body.regno })
     .then(user => {
       // this updates only given data
       for (let i in req.body) {
+        console.log(req.body[i]);
         user[i] = req.body[i];
       }
       user.save()

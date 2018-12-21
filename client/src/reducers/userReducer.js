@@ -12,6 +12,7 @@ const initialState = {
   loading: false
 };
 
+
 export default function (state = initialState, action) {
   if (action.type === VERIFY_USER) {
     console.log('users:', action.payload);
@@ -42,8 +43,9 @@ export default function (state = initialState, action) {
     case VERIFY_USER:
       return {
         ...state,
+        loading: false,
         users: action.payload,
-        loading: false
+
       };
     case UPDATE_USER:
       return {

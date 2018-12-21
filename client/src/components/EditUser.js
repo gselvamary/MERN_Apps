@@ -1,62 +1,55 @@
 import React, { Component } from 'react';
-import { Container, Card, CardBody, Button, Form, FormGroup, Input, Label, Row, Col, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import { Link } from 'react-router-dom'
+import { Container, Card, CardBody, Button, Form, FormGroup, Input, Label, Row, Col } from 'reactstrap';
 import { connect } from 'react-redux';
-import { fetchUser, updateUser, deleteUser } from '../actions/userActions';
-import { getDepts } from '../actions/deptActions';
+import { fetchUser, getUsers, updateUser, deleteUser } from '../actions/userActions';
+//import { getDepts } from '../actions/deptActions';
 import PropTypes from 'prop-types';
+import Register from './Register';
+
+
 
 class EditUser extends Component {
-    state = {
-        dropdownOpen: false,
-        visible: true,
-        deptname: 'Select Your Department',
-        regno: '',
 
-    };
     componentDidMount() {
-
-        this.props.getDepts();
+        // this.props.getUsers();
+        //  this.props.getDepts();
+        this.forceUpdate();
     };
     handleChange = (e) => {
         this.setState({
             [e.target.name]: e.target.value,
         });
+    };
 
-    };
-    onSelect = (e) => {
-        this.setState({
-            [e.target.id]: e.target.value,
-            deptname: e.target.name
-        });
-    };
-    onDismiss = () => {
-        this.setState({ visible: false });
+
+    onGetdetails = regno => {
+        this.props.fetchUser(this.state.regno);
+
     }
 
-    handleToggle = () => {
-        this.setState({
-            dropdownOpen: !this.state.dropdownOpen
-        });
-    };
-    toggle = () => {
-        this.setState({
-            visible: !this.state.visible
-        });
-    };
-
-    toGetdetails = e => {
-        this.props.fetchUser(e);
+    onDeleteClick = regno => {
+        this.props.deleteUser(regno);
     };
 
 
-    onDeleteClick = id => {
-        this.props.deleteUser(id);
 
-    };
+    onSubmit = id => {
+        id.preventDefault();
+        const val = {
+            regno: this.state.regno,
+            fname: this.state.fname,
+            lname: this.state.lname,
+            password: this.state.password,
+            dept_id: this.state.dept_id,
+            email: this.state.email,
+            mobile: this.state.mobile,
+        }
+        this.props.updateUser(val);
 
+    }
     render() {
         const { users } = this.props.user;
-        const { depts } = this.props.dept;
 
         return (
             <Container>
@@ -65,54 +58,27 @@ class EditUser extends Component {
                     <header align="center" className="w3-container w3-black">
                         <h5>Profile</h5>
                     </header>
-                
                     <CardBody >
                         <Form onSubmit={this.onSubmit}  >
                             <Row>
                                 <Col xs="6">
-                                    <Input type="text" name="regno1" id="regno1" placeholder="Enter Regno for Details" onChange={this.handleChange} />
+                                    <Input type="text" name="regno" id="regno" placeholder="Enter Regno for Details" onChange={this.handleChange} />
                                 </Col>
                                 <Col xs="6">
-                                    <Button color="primary" style={{ marginBottom: '2rem' }} onClick={this.toGetdetails.bind(this, this.state.regno1)}>Get Details</Button>
+                                    <Button color="primary" style={{ marginBottom: '2rem' }} onClick={this.onGetdetails}>Get Details</Button>
                                 </Col>
                             </Row>
-
-                            <Row></Row>
-                            <Row>
-                                <Col xs="4">
-                                    <FormGroup>
-                                        <Label>Department</Label>
-                                        <FormGroup  >
-                                            <ButtonDropdown id="dept_id" value={this.state.dept_id} isOpen={this.state.dropdownOpen} toggle={this.handleToggle}>
-                                                <DropdownToggle caret > {this.state.deptname}</DropdownToggle>
-                                                <DropdownMenu >
-                                                    {depts.map(({ _id, dept_id, dept_name, dept_sname }) => (
-                                                        <div key={_id}>
-                                                            <DropdownItem onClick={this.onSelect} value={dept_id} id="dept_id" name={dept_name}>
-                                                                {dept_name}
-                                                            </DropdownItem>
-                                                        </div>
-                                                    ))}
-
-                                                </DropdownMenu>
-                                            </ButtonDropdown>
-                                        </FormGroup>
-                                    </FormGroup>
-                                </Col>
-                            </Row>
-
-
                             <Row>
                                 <Col xs="6">
                                     <FormGroup>
                                         <Label for="fname">First Name</Label>
-                                        <Input type="text" name="fname" id="fname" value={users.fname} placeholder="First Name" onChange={this.handleChange} />
+                                        <Input type="text" name="fname" id="fname" placeholder={users.fname} onChange={this.handleChange} />
                                     </FormGroup>
                                 </Col>
                                 <Col xs="6">
                                     <FormGroup>
                                         <Label for="lname">Last Name</Label>
-                                        <Input type="text" name="lname" id="lname" value={users.lname} placeholder="Last Name" onChange={this.handleChange} />
+                                        <Input type="text" name="lname" id="lname" placeholder={users.lname} onChange={this.handleChange} />
                                     </FormGroup>
                                 </Col>
                             </Row>
@@ -121,21 +87,36 @@ class EditUser extends Component {
                                 <Col xs="6">
                                     <FormGroup>
                                         <Label for="email">Email</Label>
-                                        <Input type="text" name="email" id="email" value={users.email} placeholder="Email" onChange={this.handleChange} />
+                                        <Input type="text" name="email" id="email" placeholder={users.email} onChange={this.handleChange} />
                                     </FormGroup>
                                 </Col>
                                 <Col xs="6">
                                     <FormGroup>
                                         <Label for="mobile">Mobile</Label>
-                                        <Input type="mobile" name="mobile" id="mobile" value={users.mobile} placeholder="Mobile" onChange={this.handleChange} />
+                                        <Input type="mobile" name="mobile" id="mobile" placeholder={users.mobile} onChange={this.handleChange} />
                                     </FormGroup>
                                 </Col>
+                            </Row>
+                            <Row>
+                                <Col xs="6">
+                                    <FormGroup>
+                                        <Label for="password">Password</Label>
+                                        <Input type="text" name="password" id="password" placeholder="" onChange={this.handleChange} />
+                                    </FormGroup>
+                                </Col>
+                                <Col xs="6">
+                                    <FormGroup>
+                                        <Label for="password1">Re-Password</Label>
+                                        <Input type="text" name="password1" id="password1" placeholder="" onChange={this.handleChange} />
+                                    </FormGroup>
+                                </Col></Row>
+                            <Row>
                             </Row>
                         </Form>
                     </CardBody>
 
                     <Row>   </Row>
-                    <Button color="dark" style={{ marginBottom: '2rem' }} onClick={this.onSubmit}>Register</Button>
+                    <Button color="dark" style={{ marginBottom: '2rem' }} onClick={this.onSubmit}>Update Details</Button>
 
                 </Card>
 
@@ -149,11 +130,13 @@ class EditUser extends Component {
 
 EditUser.propTypes = {
     user: PropTypes.object.isRequired,
+    getUsers: PropTypes.func.isRequired,
     deleteUser: PropTypes.func.isRequired,
-    getDepts: PropTypes.func.isRequired,
     fetchUser: PropTypes.func.isRequired,
     updateUser: PropTypes.func.isRequired,
+
 };
+
 
 const mapStateToProps = state => ({
     user: state.user,
@@ -162,7 +145,7 @@ const mapStateToProps = state => ({
 
 export default connect(
     mapStateToProps,
-    { deleteUser, getDepts, fetchUser, updateUser }
+    { deleteUser, fetchUser, getUsers, updateUser }
 )(EditUser);
 
 

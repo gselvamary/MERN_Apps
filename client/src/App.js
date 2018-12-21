@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-
 import AppNavbar from './components/AppNavbar';
-
 import Home from './components/Home';
 
 
@@ -23,7 +21,7 @@ class App extends Component {
       <Provider store={store}>
         <div className="App" >
           <Container>
-            <AppNavbar />
+    
             <Home></Home>
             {children}
           </Container>

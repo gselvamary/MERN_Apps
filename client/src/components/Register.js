@@ -5,12 +5,14 @@ import { getUsers, deleteUser, registerUser } from '../actions/userActions';
 import { getDepts } from '../actions/deptActions';
 import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
+import ButtonAppBar from './ButtonAppBar';
+
 
 class Register extends Component {
     state = {
         dropdownOpen: false,
         visible: true,
-        deptname: 'Select Your Department'
+        deptname: 'Select Department'
     };
     componentDidMount() {
         this.props.getUsers();
@@ -72,6 +74,9 @@ class Register extends Component {
 
         return (
             <Container>
+                 <ButtonAppBar title="MyPage" linkname="Login" to="/Login" />
+                 <br></br>
+                 <br></br>
                 <Card>
                     <header align="center" className="w3-container w3-black">
                         <h5>Student Registration</h5>

@@ -21,16 +21,17 @@ class AppNavbar extends Component {
     });
   }
   render() {
+
     return (
       <div>
-        <Navbar color="dark" className="mb-5" expand="sm">
+        <Navbar color="green" className="mb-5" expand="sm">
           <Container>
-            <NavbarBrand href="/" className="text-white"> My Page</NavbarBrand>
+            <NavbarBrand href="/" className="text-white" title={this.props.title}>{this.props.title}</NavbarBrand>
             <NavbarToggler onClick={this.toggle} />
             <Collapse isOpen={this.state.isOpen} navbar>
               <Nav className="ml-auto" navbar>
                 <NavItem>
-                  <Link className="text-white" to="/EditUser" >Profile</Link>
+                  <Link className="text-white" linkName={this.props.linkName} to={this.props.to} >{this.props.linkName}</Link>
                 </NavItem>
               </Nav>
             </Collapse>

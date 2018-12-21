@@ -10,7 +10,7 @@ export const getUsers = () => dispatch => {
         })
 
     )
-    .catch(reject => console.log("Error in fetching"));
+        .catch(reject => console.log("Error in fetching"));
 };
 
 export const registerUser = user => dispatch => {
@@ -38,21 +38,25 @@ export const setUsersLoading = () => {
 };
 
 export const fetchUser = regno => dispatch => {
-        axios.get(`/users/${regno}`)
-            .then(res => 
-                dispatch({
-                    type: VERIFY_USER,
-                    payload: res.data
-                }))
-            .catch(reject => console.log("Error in fetching"));
+    axios.get(`/users/${regno}`)
+        .then(res =>
+            dispatch({
+                type: VERIFY_USER,
+                payload: res.data,
+            }))
+        .catch(reject => console.log("Error in fetching"));
 };
 
-export const updateUser = regno => dispatch => {
-    axios.patch(`/users/${regno}`)
-        .then(res => 
+export const updateUser = (user)=> dispatch => {
+    axios.patch('/users',user)
+        .then(res =>
             dispatch({
                 type: UPDATE_USER,
-                payload: res.data
+                payload: res.data,
             }))
+            .then(res=>{
+                alert("User Information Updated Successfully");
+       
+            })
         .catch(reject => console.log("Error in updating"));
 };
