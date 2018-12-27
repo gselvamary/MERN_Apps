@@ -24,7 +24,6 @@ class ButtonAppBar extends React.Component {
     render() {
        
        const { classes } = this.props;
-    const {input } =this.props;
     return (
         <div className={classes.root}>
             <AppBar position="static">

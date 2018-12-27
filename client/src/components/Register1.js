@@ -1,15 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 
 import ButtonAppBar from './ButtonAppBar';
 import Input from './Input'
 import MyButton from './MyButton'
 import Avatar from '@material-ui/core/Avatar';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import FormControl from '@material-ui/core/FormControl';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 //import Input from '@material-ui/core/Input';
 import Grid from '@material-ui/core/Grid';
 import LockIcon from '@material-ui/icons/LockOutlined';

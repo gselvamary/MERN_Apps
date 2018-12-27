@@ -28,7 +28,7 @@ class MyButton extends Component {
           id={this.props.id}
           className={classes.button}
           label={this.props.label}
-          
+          onClick={this.props.onClick}
         >
           {this.props.label}
         </Button>

@@ -4,6 +4,7 @@ import Register from './Register';
 import EditUser from './EditUser';
 import Register_1 from './Register_1';
 import Register1 from './Register1';
+import EditProfile from './EditProfile';
 import Login from './Login';
 import { Container } from 'reactstrap';
 
@@ -20,6 +21,7 @@ class Home extends Component {
                         <Route exact path="/Login" component={Login} />
                         <Route exact path="/Register1" component={Register1}/>
                         <Route exact path="/Register_1" component={Register_1}/>
+                        <Route exact path="/EditProfile" component={EditProfile}/>
                     </Switch>
                 </Container>
             </div>

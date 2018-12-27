@@ -19,7 +19,8 @@ export const registerUser = user => dispatch => {
             type: REGISTER_USER,
             payload: res.data
         })
-    );
+    )
+    .catch(reject => console.log("Error in Registering"));
 };
 
 export const deleteUser = regno => dispatch => {

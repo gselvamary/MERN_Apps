@@ -58,6 +58,7 @@ class Input extends Component {
         value={this.props.value}
         fullWidth
         required
+        onChange={this.props.onChange}
       />
     </div>
   );

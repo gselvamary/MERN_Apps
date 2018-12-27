@@ -51,14 +51,13 @@ const styles = theme => ({
 });
 
 
-class Register_1 extends Component {
+class Register extends Component {
     state = {
         dropdownOpen: false,
         visible: true,
         deptname: 'Select Department',
         labelWidth: 0,
-        deptid: ''
-        
+        age: ''
     };
 
 
@@ -75,8 +74,11 @@ class Register_1 extends Component {
         });
 
     };
-    onSelect = event => {
-        this.setState({ dept_id: event.target.value });
+    onSelect = (e) => {
+        this.setState({
+            [e.target.id]: e.target.value,
+            deptname: e.target.name
+        });
     };
     onDismiss = () => {
         this.setState({ visible: false });
@@ -96,6 +98,7 @@ class Register_1 extends Component {
 
     onSubmit = e => {
         e.preventDefault();
+
         const newUser = {
             regno: this.state.regno,
             fname: this.state.fname,
@@ -107,13 +110,9 @@ class Register_1 extends Component {
         }
         //Add user via registerUser:
         this.props.registerUser(newUser);
-        alert(this.state.regno + this.state.fname + this.state.lname + this.state.password + this.state.dept_id + this.state.email + this.state.mobile)
         alert("User Registration is Successful");
 
     };
-    onClick = () => {
-        alert(this.state.regno)
-    }
     onDeleteClick = id => {
         this.props.deleteUser(id);
 
@@ -134,56 +133,55 @@ class Register_1 extends Component {
                             <LockIcon />
                         </Avatar>
                         <Typography component="h1" variant="h5">
-                            Registration
+                           Edit Profile
             </Typography>
                         <form className={classes.form} onSubmit={this.onSubmit}>
                             <Grid container spacing={24}>
                                 <Grid item sm={12} xs={12}>
-                                    <Input id="regno" name="regno" label="Registration Number" autoFocus  onChange={this.handleChange} />
+                                    <Input id="regno" name="regno" label="Registration Number" autoFocus />
                                 </Grid>
                                 <Grid item sm={6} xs={12}>
-                                    <Input id="fname" name="fname" label="First Name" autoFocus  onChange={this.handleChange} />
+                                    <Input id="fname" name="fname" label="First Name" autoFocus />
                                 </Grid>
                                 <Grid item sm={6} xs={12}>
-                                    <Input id="lname" name="lname" label="Last Name"  onChange={this.handleChange} autoFocus />
+                                    <Input id="lname" name="lname" label="Last Name" autoFocus />
                                 </Grid>
                                 <Grid item sm={6} xs={12}>
-                                    <Input name="password" id="password"  onChange={this.handleChange} label="Password" />
+                                    <Input name="password" id="password" label="Password" />
                                 </Grid>
                                 <Grid item sm={6} xs={12}>
-                                    <Input name="password1" id="password1" onChange={this.handleChange} label="Repeat Password" />
+                                    <Input name="password1" id="password1" label="Repeat Password" />
                                 </Grid>
-                                <Grid item sm={12} xs={12}>
-
+                                <Grid item xs={12} sm={12}>
                                     <FormControl fullWidth variant="outlined" className={classes.formControl}>
-
-                                        <InputLabel ref={ref => { this.InputLabelRef = ref; }} htmlFor="idlabel">{this.state.deptname}</InputLabel>
-                                        <Select
-                                            value={this.state.dept_id}
-                                            onChange={this.onSelect}
-                                            input={<OutlinedInput labelWidth={this.state.labelWidth} name="dept" id="idlabel" />}
+                                        <InputLabel ref={ref => {
+                                            this.InputLabelRef = ref;
+                                        }}
+                                            htmlFor="outlined-age-simple"
                                         >
-                                            {depts.map(({ _id, dept_id, dept_name }) => {
-                                                return (
-                                                    <MenuItem key={dept_id} value={dept_id}>
-                                                        {dept_name}
-                                                    </MenuItem>
-                                                );
-                                            })}
+                                            Select Department </InputLabel>
+                                        <Select value={this.state.age} onChange={this.handleChange} input={<OutlinedInput
+                                            labelWidth={this.state.labelWidth} name="age" id="outlined-age-simple" />
+                                        }
+                                        >
+                                            {depts.map(({ _id, dept_id, dept_name }) => (
+                                                <div key={_id}>
+                                                    <MenuItem onClick={this.onSelect} id="dept_id" value={dept_id} name={dept_name}>{dept_name}</MenuItem>
+                                                </div>
+                                            ))}
                                         </Select>
                                     </FormControl>
 
                                 </Grid>
                                 <Grid item sm={6} xs={12}>
-                                    <Input id="email" name="email" autoFocus  onChange={this.handleChange} label="Email ID" />
+                                    <Input id="email" name="email" autoFocus label="Email ID" />
                                 </Grid>
                                 <Grid item sm={6} xs={12}>
-                                    <Input name="mobile" id="mobile" label="Mobile Number" onChange={this.handleChange} autoFocus />
+                                    <Input name="mobile" id="mobile" label="Mobile Number" autoFocus />
                                 </Grid>
                             </Grid>
-
+                            <MyButton type="submit" fullWidth variant="contained" color="primary" className={classes.submit} label="Register" />
                         </form>
-                        <MyButton sm={6} xs={12} type="submit" onClick={this.onSubmit} fullWidth variant="contained" color="primary" className={classes.submit} label="Register" />
                     </Paper>
                 </main>
                 <br></br>
@@ -217,7 +215,7 @@ class Register_1 extends Component {
 }
 
 
-Register_1.propTypes = {
+Register.propTypes = {
     getUsers: PropTypes.func.isRequired,
     user: PropTypes.object.isRequired,
     deleteUser: PropTypes.func.isRequired,
@@ -234,27 +232,10 @@ const mapStateToProps = state => ({
 export default connect(
     mapStateToProps,
     { getUsers, deleteUser, registerUser, getDepts }
-)(withStyles(styles)(Register_1));
+)(withStyles(styles)(Register));
 
 
 /*
-</FormControl>
 
-                                        <InputLabel ref={ref => {
-                                            this.InputLabelRef = ref;
-                                        }}
-                                            htmlFor="outlined-age-simple"
-                                        >
-                                            Select Department </InputLabel>
-                                        <Select value={this.state.dept_id} onChange={this.handleChange} input={<OutlinedInput
-                                            labelWidth={this.state.labelWidth} name="dept_name" id="outlined-age-simple" />
-                                        }
-                                        >
-                                            {depts.map(({ _id, dept_id, dept_name }) => (
-                                                <div key={_id}>
-                                                    <MenuItem onClick={this.onSelect} id="dept_id" value={dept_id} name={dept_name}>{dept_name}</MenuItem>
-                                                </div>
-                                            ))}
-                                        </Select>
 
 */

@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom'
 import { Container, Card, CardBody, Button, Form, FormGroup, Input, Label, Row, Col } from 'reactstrap';
 import { connect } from 'react-redux';
 import { fetchUser, getUsers, updateUser, deleteUser } from '../actions/userActions';
 //import { getDepts } from '../actions/deptActions';
 import PropTypes from 'prop-types';
-import Register from './Register';
 
 
 
@@ -23,7 +21,7 @@ class EditUser extends Component {
     };
 
 
-    onGetdetails = regno => {
+    onGetdetails = () => {
         this.props.fetchUser(this.state.regno);
 
     }
