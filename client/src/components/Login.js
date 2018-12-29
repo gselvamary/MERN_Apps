@@ -18,13 +18,22 @@ import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 
 const styles = theme => ({
+  palette: {
+    color1: {
+      main: '#d81b60',
+    },
+    color2: {
+      main: '#388e3c',
+    },
+  },
   main: {
+    marginTop: '20%',
     width: 'auto',
     display: 'block', // Fix IE 11 issue.
     marginLeft: theme.spacing.unit * 3,
     marginRight: theme.spacing.unit * 3,
     [theme.breakpoints.up(400 + theme.spacing.unit * 3 * 2)]: {
-      width: 400,
+      width: 450,
       marginLeft: 'auto',
       marginRight: 'auto',
     },
@@ -46,6 +55,7 @@ const styles = theme => ({
   },
   submit: {
     marginTop: theme.spacing.unit * 3,
+    backgroundColor:'#4caf50'
   },
 });
 
@@ -53,43 +63,39 @@ function SignIn(props) {
   const { classes } = props;
 
   return (
-      <div>
-       <ButtonAppBar title="MyPage" linkname="Register" to="/Register" />
-    <main className={classes.main}>
-      
-      <CssBaseline />
-      <Paper className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Sign in
-        </Typography>
-        <form className={classes.form}>
-          <FormControl margin="normal" required fullWidth>
-            <InputLabel htmlFor="email">Email Address</InputLabel>
-            <Input id="email" name="email" autoComplete="email" autoFocus />
-          </FormControl>
-          <FormControl margin="normal" required fullWidth>
-            <InputLabel htmlFor="password">Password</InputLabel>
-            <Input name="password" type="password" id="password" autoComplete="current-password" />
-          </FormControl>
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-          >
+    <div>
+      <ButtonAppBar title="K Ramakrishnan Group of Institutions" linkname="Register" to="/Register" />
+      <main className={classes.main}>
+        <CssBaseline />
+        <Paper className={classes.paper}>
+          <Avatar className={classes.avatar}>
+            <LockIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
             Sign in
+        </Typography>
+          <form className={classes.form}>
+            <FormControl margin="normal" required fullWidth>
+              <InputLabel htmlFor="regno">Registration Number</InputLabel>
+              <Input id="regno" name="regno" autoComplete="regno" autoFocus />
+            </FormControl>
+            <FormControl margin="normal" required fullWidth>
+              <InputLabel htmlFor="password">Password</InputLabel>
+              <Input name="password" type="text" id="password" autoComplete="current-password" />
+            </FormControl>
+            <br></br>
+            <Button 
+              fullWidth
+              variant="contained"
+           className={classes.submit}
+            >
+              LOGIN
           </Button>
-        </form>
-      </Paper>
-    </main>
+          <br></br>
+          </form>
+      
+        </Paper>
+      </main>
     </div>
   );
 }

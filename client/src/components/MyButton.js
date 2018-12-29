@@ -7,6 +7,7 @@ import Button from '@material-ui/core/Button';
 const styles = theme => ({
   button: {
     marginTop: theme.spacing.unit,
+    backgroundColor:'#4caf50'
   },
   input: {
     display: 'none',
@@ -24,7 +25,6 @@ class MyButton extends Component {
           type={this.props.type}
           fullWidth
           variant="contained"
-          color="primary"
           id={this.props.id}
           className={classes.button}
           label={this.props.label}

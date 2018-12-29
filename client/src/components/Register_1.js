@@ -19,12 +19,13 @@ import withStyles from '@material-ui/core/styles/withStyles';
 
 const styles = theme => ({
     main: {
+        marginTop: '20%',
         width: 'auto',
         display: 'block', // Fix IE 11 issue.
         marginLeft: theme.spacing.unit * 3,
         marginRight: theme.spacing.unit * 3,
         [theme.breakpoints.up(400 + theme.spacing.unit * 3 * 2)]: {
-            width: 800,
+            width: 600,
             marginLeft: 'auto',
             marginRight: 'auto',
         },
@@ -53,12 +54,7 @@ const styles = theme => ({
 
 class Register_1 extends Component {
     state = {
-        dropdownOpen: false,
-        visible: true,
-        deptname: 'Select Department',
         labelWidth: 0,
-        deptid: ''
-        
     };
 
 
@@ -107,8 +103,9 @@ class Register_1 extends Component {
         }
         //Add user via registerUser:
         this.props.registerUser(newUser);
-        alert(this.state.regno + this.state.fname + this.state.lname + this.state.password + this.state.dept_id + this.state.email + this.state.mobile)
-        alert("User Registration is Successful");
+
+        // alert(this.state.regno + this.state.fname + this.state.lname + this.state.password + this.state.dept_id + this.state.email + this.state.mobile)
+        //   alert("User Registration is Successful");
 
     };
     onClick = () => {
@@ -126,7 +123,7 @@ class Register_1 extends Component {
         return (
             <div>
                 <ButtonAppBar title="MyPage" linkname="Login" to="/Login" />
-                <main>
+                <main className={classes.main}>
 
                     <CssBaseline />
                     <Paper className={classes.paper}>
@@ -134,30 +131,30 @@ class Register_1 extends Component {
                             <LockIcon />
                         </Avatar>
                         <Typography component="h1" variant="h5">
-                            Registration
+                            Register your Account
             </Typography>
                         <form className={classes.form} onSubmit={this.onSubmit}>
                             <Grid container spacing={24}>
                                 <Grid item sm={12} xs={12}>
-                                    <Input id="regno" name="regno" label="Registration Number" autoFocus  onChange={this.handleChange} />
+                                    <Input id="regno" name="regno" label="Registration Number" autoFocus onChange={this.handleChange} />
                                 </Grid>
                                 <Grid item sm={6} xs={12}>
-                                    <Input id="fname" name="fname" label="First Name" autoFocus  onChange={this.handleChange} />
+                                    <Input id="fname" name="fname"  label="First Name" autoFocus onChange={this.handleChange} />
                                 </Grid>
                                 <Grid item sm={6} xs={12}>
-                                    <Input id="lname" name="lname" label="Last Name"  onChange={this.handleChange} autoFocus />
+                                    <Input id="lname" name="lname"  label="Last Name" onChange={this.handleChange} autoFocus />
                                 </Grid>
                                 <Grid item sm={6} xs={12}>
                                     <Input name="password" id="password"  onChange={this.handleChange} label="Password" />
                                 </Grid>
                                 <Grid item sm={6} xs={12}>
-                                    <Input name="password1" id="password1" onChange={this.handleChange} label="Repeat Password" />
+                                    <Input name="password1" id="password1"  onChange={this.handleChange} label="Repeat Password" />
                                 </Grid>
                                 <Grid item sm={12} xs={12}>
 
-                                    <FormControl fullWidth variant="outlined" className={classes.formControl}>
+                                    <FormControl fullWidth variant="outlined"   className={classes.formControl}>
 
-                                        <InputLabel ref={ref => { this.InputLabelRef = ref; }} htmlFor="idlabel">{this.state.deptname}</InputLabel>
+                                        <InputLabel ref={ref => { this.InputLabelRef = ref; }} htmlFor="idlabel">Select Department</InputLabel>
                                         <Select
                                             value={this.state.dept_id}
                                             onChange={this.onSelect}
@@ -175,15 +172,17 @@ class Register_1 extends Component {
 
                                 </Grid>
                                 <Grid item sm={6} xs={12}>
-                                    <Input id="email" name="email" autoFocus  onChange={this.handleChange} label="Email ID" />
+                                    <Input id="email" name="email"  autoFocus onChange={this.handleChange} label="Email ID" />
                                 </Grid>
                                 <Grid item sm={6} xs={12}>
-                                    <Input name="mobile" id="mobile" label="Mobile Number" onChange={this.handleChange} autoFocus />
+                                    <Input name="mobile" id="mobile" required label="Mobile Number" onChange={this.handleChange} autoFocus />
                                 </Grid>
                             </Grid>
 
-                        </form>
-                        <MyButton sm={6} xs={12} type="submit" onClick={this.onSubmit} fullWidth variant="contained" color="primary" className={classes.submit} label="Register" />
+                            <br></br>
+                            <MyButton sm={6} xs={12} type="submit" onClick={this.onSubmit} fullWidth variant="contained"  className={classes.submit} label="Register" />
+
+                            <br></br> </form>
                     </Paper>
                 </main>
                 <br></br>

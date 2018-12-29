@@ -20,6 +20,7 @@ export const registerUser = user => dispatch => {
             payload: res.data
         })
     )
+    .then(alert("User Registration Successful"))
     .catch(reject => console.log("Error in Registering"));
 };
 
