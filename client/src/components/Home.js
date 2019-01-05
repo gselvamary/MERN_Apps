@@ -18,7 +18,7 @@ class Home extends Component {
                         <Route exact path="/EditUser" component={EditUser} />
                         <Route exact path="/" component={Login} />
                         <Route exact path="/Login" component={Login} />
-                        <Route exact path="/EditProfile" component={EditProfile}/>
+                        <Route exact path="/Profile" component={EditProfile}/>
                         <Route exact path="/Dashboard" component={DashBoard}/>
                     </Switch>
                 </Container>

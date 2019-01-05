@@ -55,7 +55,7 @@ const styles = theme => ({
   },
   submit: {
     marginTop: theme.spacing.unit * 3,
-    backgroundColor:'#4caf50'
+    backgroundColor: '#4caf50'
   },
 });
 
@@ -84,16 +84,16 @@ function SignIn(props) {
               <Input name="password" type="text" id="password" autoComplete="current-password" />
             </FormControl>
             <br></br>
-            <Button 
+            <Button
               fullWidth
               variant="contained"
-           className={classes.submit}
+              className={classes.submit}
             >
               LOGIN
           </Button>
-          <br></br>
+            <br></br>
           </form>
-      
+
         </Paper>
       </main>
     </div>
