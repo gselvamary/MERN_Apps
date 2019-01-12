@@ -1,21 +1,13 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
 
-import { CssBaseline, AppBar, Toolbar, IconButton, Typography, Drawer, Hidden, Divider, Grid, MenuItem } from '@material-ui/core';
-import { Folder } from '@material-ui/icons';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
-import { List, Menu, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
-import { Link } from 'react-router-dom';
+import { CssBaseline, AppBar, Toolbar, IconButton, Typography, Drawer, Divider } from '@material-ui/core';
+import { List } from '@material-ui/core';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ButtonAppBar from './ButtonAppBar';
 import { mainListItems, secondaryListItems } from './listItems';
-import Badge from '@material-ui/core/Badge';
 import MenuIcon from '@material-ui/icons/Menu';
-import NotificationsIcon from '@material-ui/icons/Notifications';
-import MoreIcon from '@material-ui/icons/MoreVert';
 import MoreIconlist from './MoreIconlist';
-import AppNavbar from './AppNavbar';
 
 
 const drawerWidth = 250;
@@ -59,9 +51,7 @@ const styles = theme => ({
         marginLeft: 12,
         marginRight: 36,
     },
-    menuButtonHidden: {
-        display: 'none',
-    },
+    
     menuButton1: {
         marginRight: 0,
         [theme.breakpoints.up('sm')]: {
@@ -69,24 +59,10 @@ const styles = theme => ({
         }
     },
 
-    drawerPaper: {
-        width: drawerWidth,
-    },
-    content: {
-        flexGrow: 1,
-        padding: theme.spacing.unit * 3,
-    },
-
-    menuButton: {
-        marginLeft: 12,
-        marginRight: 36,
-    },
     menuButtonHidden: {
         display: 'none',
     },
-    title: {
-        flexGrow: 1,
-    },
+   
     drawerPaper: {
         //position: 'relative',
         whiteSpace: 'nowrap',
@@ -117,14 +93,6 @@ const styles = theme => ({
 
     h5: {
         marginBottom: theme.spacing.unit * 2,
-    },
-    appBarShift: {
-        marginLeft: drawerWidth,
-        width: `calc(100% - ${drawerWidth}px)`,
-        transition: theme.transitions.create(['width', 'margin'], {
-            easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.enteringScreen,
-        }),
     },
 
     toolbarIcon: {
@@ -162,7 +130,7 @@ class Layout extends React.Component {
             <div className="centered" >
                 <div className={classes.root}>
                     <CssBaseline />
-                    <AppBar color="secondary" menuTitle={this.props.menuTitle}
+                    <AppBar color="secondary" 
                         position="absolute"
                         className={classNames(classes.appBar, this.state.open && classes.appBarShift)}
                     >
@@ -186,7 +154,7 @@ class Layout extends React.Component {
                                 className={classes.title}
                                 title={this.props.title}
                             >
-                                {this.props.menuTitle}
+                          Selva Mary. G
                             </Typography>
                             <IconButton color="inherit"
                                 aria-label="Open drawer"

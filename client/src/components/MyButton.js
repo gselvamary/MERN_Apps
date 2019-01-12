@@ -37,7 +37,7 @@ class MyButton extends Component {
   }
 }
 MyButton.propTypes = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object,
 };
 
 export default withStyles(styles)(MyButton);

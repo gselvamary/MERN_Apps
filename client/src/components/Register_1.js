@@ -19,7 +19,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 
 const styles = theme => ({
     main: {
-        marginTop: '20%',
+        marginTop: '10%',
         width: 'auto',
         display: 'block', // Fix IE 11 issue.
         marginLeft: theme.spacing.unit * 3,

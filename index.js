@@ -11,7 +11,6 @@ const depts = require('./routes/dept/info');
 
 
 
-
 const connect = require('./config/keys');
 /*
 // connects our back end code with the database

@@ -6,18 +6,10 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import MoreIcon from '@material-ui/icons/MoreVert';
 import classNames from 'classnames';
-import Badge from '@material-ui/core/Badge';
 import MoreIconlist from './MoreIconlist';
 
 
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import Switch from '@material-ui/core/Switch';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import { List } from '@material-ui/core';
-import MenuItem from '@material-ui/core/MenuItem';
-import Menu from '@material-ui/core/Menu';
 const drawerWidth = 250;
 
 const styles = theme => ({
@@ -68,25 +60,7 @@ const styles = theme => ({
             marginRight: 10,
         }
     },
-
-    drawerPaper: {
-        width: drawerWidth,
-    },
-    content: {
-        flexGrow: 1,
-        padding: theme.spacing.unit * 3,
-    },
-
-    menuButton: {
-        marginLeft: 12,
-        marginRight: 36,
-    },
-    menuButtonHidden: {
-        display: 'none',
-    },
-    title: {
-        flexGrow: 1,
-    },
+   
     drawerPaper: {
         //position: 'relative',
         whiteSpace: 'nowrap',
@@ -118,14 +92,7 @@ const styles = theme => ({
     h5: {
         marginBottom: theme.spacing.unit * 2,
     },
-    appBarShift: {
-        marginLeft: drawerWidth,
-        width: `calc(100% - ${drawerWidth}px)`,
-        transition: theme.transitions.create(['width', 'margin'], {
-            easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.enteringScreen,
-        }),
-    },
+   
 
     toolbarIcon: {
         display: 'flex',
@@ -153,7 +120,6 @@ class MenuAppBar extends React.Component {
 
   render() {
     const { classes } = this.props;
-    const { open } = this.state;
 
 
     return (

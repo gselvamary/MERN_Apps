@@ -6,7 +6,6 @@ import MenuItem from '@material-ui/core/MenuItem';
 import toRenderProps from 'recompose/toRenderProps';
 import withState from 'recompose/withState';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import { moreItemList } from './listItems';
 const WithState = toRenderProps(withState('anchorEl', 'updateAnchorEl', null));
 
 
