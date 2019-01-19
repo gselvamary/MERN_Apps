@@ -1,13 +1,9 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { Button, ListGroup, ListGroupItem, ListGroupItemHeading } from 'reactstrap';
 import { connect } from 'react-redux';
-import { getUsers, deleteUser, registerUser } from '../actions/userActions';
-import { getDepts } from '../actions/deptActions';
+import { getUsers } from '../actions/userActions';
 import PropTypes from 'prop-types';
-import { Link } from "react-router-dom";
 import ButtonAppBar from './ButtonAppBar';
-import Input from './Input'
 import MyButton from './MyButton'
 import Avatar from '@material-ui/core/Avatar';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -15,8 +11,6 @@ import LockIcon from '@material-ui/icons/LockOutlined';
 import { Paper, Typography, OutlinedInput, MenuItem, Select, FormControl, InputLabel } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import withStyles from '@material-ui/core/styles/withStyles';
-import AddFacultyList from './AddFacultyList';
-import AutoComplete from 'material-ui/AutoComplete';
 
 const styles = theme => ({
     main: {
@@ -54,18 +48,24 @@ const styles = theme => ({
 
 
 class Register_1 extends Component {
+
     state = {
         labelWidth: 0,
-        searchText: '',
-        regno: ''
-
     };
 
 
     componentDidMount() {
         this.props.getUsers();
-
+        this.setState({
+            labelWidth: ReactDOM.findDOMNode(this.InputLabelRef).offsetWidth,
+        });
     };
+
+    onSelect = event => {
+        this.setState({ regno: event.target.value });
+    };
+
+
     handleChange = (e) => {
         this.setState({
             [e.target.name]: e.target.value,
@@ -73,41 +73,8 @@ class Register_1 extends Component {
 
     };
 
-    onDismiss = () => {
-        this.setState({ visible: false });
-    }
-
-    handleToggle = () => {
-        this.setState({
-            dropdownOpen: !this.state.dropdownOpen
-        });
-    };
-    toggle = () => {
-        this.setState({
-            visible: !this.state.visible
-        });
-    };
-
-
-    onClick = () => {
-        alert(this.state.regno)
-    }
-
-    handleUpdateInput = (searchText) => {
-        this.setState({
-            searchText: searchText,
-        });
-    };
-
-    handleNewRequest = () => {
-        this.setState({
-            searchText: '',
-        });
-    };
-
     render() {
         const { users } = this.props.user;
-        const { depts } = this.props.dept;
         const { classes } = this.props;
 
         return (
@@ -129,12 +96,14 @@ class Register_1 extends Component {
                                 <Grid item sm={12} xs={12}>
                                     <FormControl fullWidth variant="outlined" className={classes.formControl}>
 
-                                        <InputLabel ref={ref => { this.InputLabelRef = ref; }} htmlFor="idlabel"></InputLabel>
+                                        <InputLabel ref={ref => { this.InputLabelRef = ref; }} htmlFor="idlabel">Select Faculty</InputLabel>
                                         <Select
                                             value={this.state.regno}
-                                            onChange={this.handleChange}
+                                            onChange={this.onSelect}
+                                            input={<OutlinedInput labelWidth={this.state.labelWidth} name="user" id="idlabel" />}
                                         >
-                                            {users.map(({ _id, regno, fname }) => {
+
+                                            {users.map(({ regno, fname }) => {
                                                 return (
                                                     <MenuItem key={regno} value={regno}>
                                                         {regno} - {fname}
@@ -155,14 +124,7 @@ class Register_1 extends Component {
                             <br></br> </form>
                     </Paper>
                 </main>
-                <br></br>
-                <br></br>
-                <br></br>
-                <Link style={{ textDecoration: 'none' }} to="/EditUser">
-                    <Button color="dark" style={{ marginBottom: '2rem' }}>Edit Profile</Button>
-                </Link>
-                <br></br>
-                <br></br>
+
             </div>
         );
     }
@@ -172,19 +134,16 @@ class Register_1 extends Component {
 Register_1.propTypes = {
     getUsers: PropTypes.func.isRequired,
     user: PropTypes.object.isRequired,
-    deleteUser: PropTypes.func.isRequired,
-    registerUser: PropTypes.func.isRequired,
-    getDepts: PropTypes.func.isRequired,
     classes: PropTypes.object,
 };
 
 const mapStateToProps = state => ({
     user: state.user,
-    dept: state.dept
+
 });
 
 export default connect(
     mapStateToProps,
-    { getUsers, deleteUser, registerUser, getDepts }
+    { getUsers }
 )(withStyles(styles)(Register_1));
 
