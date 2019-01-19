@@ -52,27 +52,18 @@ const styles = theme => ({
     },
 });
 
-const colors = [
-    'Red',
-    'Orange',
-    'Yellow',
-    'Green',
-    'Blue',
-    'Purple',
-    'Black',
-    'White',
-];
+
 class Register_1 extends Component {
     state = {
         labelWidth: 0,
         searchText: '',
+        regno: ''
 
     };
 
 
     componentDidMount() {
         this.props.getUsers();
-        this.props.getDepts();
 
     };
     handleChange = (e) => {
@@ -98,31 +89,10 @@ class Register_1 extends Component {
     };
 
 
-    onSubmit = e => {
-        e.preventDefault();
-        const newUser = {
-            regno: this.state.regno,
-            fname: this.state.fname,
-            lname: this.state.lname,
-            password: this.state.password,
-            dept_id: this.state.dept_id,
-            email: this.state.email,
-            mobile: this.state.mobile,
-        }
-        //Add user via registerUser:
-        this.props.registerUser(newUser);
-
-        // alert(this.state.regno + this.state.fname + this.state.lname + this.state.password + this.state.dept_id + this.state.email + this.state.mobile)
-        //   alert("User Registration is Successful");
-
-    };
     onClick = () => {
         alert(this.state.regno)
     }
-    onDeleteClick = id => {
-        this.props.deleteUser(id);
 
-    };
     handleUpdateInput = (searchText) => {
         this.setState({
             searchText: searchText,
@@ -139,10 +109,7 @@ class Register_1 extends Component {
         const { users } = this.props.user;
         const { depts } = this.props.dept;
         const { classes } = this.props;
-        const userslist = [];
-        users.map(({ _id, regno, fname }) => {
-            userslist = [{ regno, fname }];
-        })
+
         return (
             <div>
                 <ButtonAppBar title="MyPage" linkname="Login" to="/Login" />
@@ -176,19 +143,10 @@ class Register_1 extends Component {
                                             })}
                                         </Select>
                                     </FormControl>
-
-                                    <AddFacultyList />
+                                    <br></br>
 
                                 </Grid>
-                                <AutoComplete
-                                    hintText="faculty id"
-                                    searchText={this.state.searchText}
-                                    onUpdateInput={this.handleUpdateInput}
-                                    onNewRequest={this.handleNewRequest}
-                                    dataSource={userslist}
-                                    filter={(searchText, key) => (key.indexOf(searchText) !== -1)}
-                                    openOnFocus={true}
-                                />
+
                             </Grid>
 
                             <br></br>
@@ -203,23 +161,6 @@ class Register_1 extends Component {
                 <Link style={{ textDecoration: 'none' }} to="/EditUser">
                     <Button color="dark" style={{ marginBottom: '2rem' }}>Edit Profile</Button>
                 </Link>
-
-
-                <br></br>
-                <br></br>
-                <br></br>
-                <ListGroup>
-                    {users.map(({ _id, regno, fname }) => (
-                        <ListGroupItemHeading key={_id}>
-                            <ListGroupItem>
-                                <Button className="remove-btn" color="danger" size="sm" onClick={this.onDeleteClick.bind(this, regno)}>
-                                    &times;
-                </Button>
-                                {regno} - {fname}
-                            </ListGroupItem>
-                        </ListGroupItemHeading>
-                    ))}
-                </ListGroup>
                 <br></br>
                 <br></br>
             </div>
