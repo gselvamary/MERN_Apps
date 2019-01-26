@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import Avatar from '@material-ui/core/Avatar';
@@ -11,6 +11,13 @@ import LockIcon from '@material-ui/icons/LockOutlined';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
+import { loginUser } from "../actions/authActions";
+import { getUsers } from "../actions/userActions";
+import classnames from "classnames";
+import { connect } from "react-redux";
+
+
+
 const styles = theme => ({
   palette: {
     color1: {
@@ -21,7 +28,7 @@ const styles = theme => ({
     },
   },
   main: {
-   marginTop: '10%',
+    marginTop: '10%',
     width: 'auto',
     display: 'block', // Fix IE 11 issue.
     marginLeft: theme.spacing.unit * 3,
@@ -53,48 +60,109 @@ const styles = theme => ({
   },
 });
 
-function SignIn(props) {
-  const { classes } = props;
 
-  return (
-    <div>
-      <main className={classes.main}>
-        <CssBaseline />
-        <Paper className={classes.paper}>
-          <Avatar className={classes.avatar}>
-            <LockIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Sign in
+class Login extends Component {
+  state = {
+    errors: {},
+    regno: '',
+    password: ''
+  };
+  handleChange = e => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
+  onSubmit = e => {
+    e.preventDefault();
+    const userData = {
+      regno: this.state.regno,
+      password: this.state.password
+    };
+    this.props.loginUser(userData);
+  //  console.log(userData);
+  };
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.auth.isAuthenticated) {
+      this.props.history.push("/Dashboard"); // push user to dashboard when they login
+    }
+    if (nextProps.errors) {
+      this.setState({
+        errors: nextProps.errors
+      });
+    }
+  }
+  render() {
+
+    const { errors } = this.state;
+    const { classes } = this.props;
+    return (
+      <div>
+        <main className={classes.main}>
+          <CssBaseline />
+          <Paper className={classes.paper}>
+            <Avatar className={classes.avatar}>
+              <LockIcon />
+            </Avatar>
+            <Typography component="h1" variant="h5">
+              Sign in
         </Typography>
-          <form className={classes.form}>
-            <FormControl margin="normal" required fullWidth>
-              <InputLabel htmlFor="regno">Registration Number</InputLabel>
-              <Input id="regno" name="regno" autoComplete="regno" autoFocus />
-            </FormControl>
-            <FormControl margin="normal" required fullWidth>
-              <InputLabel htmlFor="password">Password</InputLabel>
-              <Input name="password" type="text" id="password" autoComplete="current-password" />
-            </FormControl>
-            <br></br>
-            <Button
-              fullWidth
-              variant="contained"
-              className={classes.submit}
-            >
-              LOGIN
-          </Button>
-            <br></br>
-          </form>
+            <form className={classes.form} onSubmit={this.onSubmit}>
+              <FormControl margin="normal" required fullWidth>
+                <InputLabel htmlFor="regno">Registration Number</InputLabel>
+                <Input id="regno" name="regno" onChange={this.handleChange}
+                  className={classnames("", {
+                    invalid: errors.regno || errors.regnonotfound
+                  })} />
+                <span className="red-text">
+                  {errors.regno}
+                  {errors.regnonotfound}
+                </span>
 
-        </Paper>
-      </main>
-    </div>
-  );
+              </FormControl>
+              <FormControl margin="normal" required fullWidth>
+                <InputLabel htmlFor="password">Password</InputLabel>
+                <Input name="password" type="password" id="password" onChange={this.handleChange}
+                  className={classnames("", {
+                    invalid: errors.password || errors.passwordincorrect
+                  })} />
+                <span className="red-text">
+                  {errors.password}
+                  {errors.passwordincorrect}
+                </span>
+              </FormControl>
+              <br></br>
+              <Button
+                fullWidth
+                variant="contained"
+                className={classes.submit}
+                type="submit"
+              >
+                LOGIN
+          </Button>
+              <br></br>
+            </form>
+
+          </Paper>
+        </main>
+      </div>
+    );
+  };
 }
 
-SignIn.propTypes = {
-  classes: PropTypes.object.isRequired,
+Login.propTypes = {
+  loginUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired,
+  getUsers: PropTypes.func.isRequired,
 };
+const mapStateToProps = state => ({
+  auth: state.auth,
+  errors: state.errors,
+  user: state.user,
+});
+export default connect(
+  mapStateToProps,
+  { loginUser, getUsers }
+)(withStyles(styles)(Login));
 
-export default withStyles(styles)(SignIn);
+
+
+

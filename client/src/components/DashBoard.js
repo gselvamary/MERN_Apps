@@ -9,6 +9,25 @@ import { mainListItems, secondaryListItems } from './listItems';
 import MenuIcon from '@material-ui/icons/Menu';
 import MoreIconlist from './MoreIconlist';
 
+import { Container } from 'reactstrap';
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+import '../App';
+import { Provider } from 'react-redux';
+import store from '../store';
+import { Route, Switch, Redirect } from 'react-router-dom'
+import Register_1 from './Register_1';
+
+import Login from './Login';
+import PropTypes from 'prop-types';
+
+import jwt_decode from "jwt-decode";
+import setAuthToken from "../utils/setAuthToken";
+import { setCurrentUser, logoutUser } from "../actions/authActions";
+import Home from "./Home";
+import PrivateRoute from "./private-route/PrivateRoute";
+import MyHome from "./MyHome";
+
 
 const drawerWidth = 250;
 
@@ -51,7 +70,7 @@ const styles = theme => ({
         marginLeft: 12,
         marginRight: 36,
     },
-    
+
     menuButton1: {
         marginRight: 0,
         [theme.breakpoints.up('sm')]: {
@@ -62,7 +81,7 @@ const styles = theme => ({
     menuButtonHidden: {
         display: 'none',
     },
-   
+
     drawerPaper: {
         //position: 'relative',
         whiteSpace: 'nowrap',
@@ -128,9 +147,10 @@ class Layout extends React.Component {
         return (
 
             <div className="centered" >
+
                 <div className={classes.root}>
                     <CssBaseline />
-                    <AppBar color="secondary" 
+                    <AppBar color="secondary"
                         position="absolute"
                         className={classNames(classes.appBar, this.state.open && classes.appBarShift)}
                     >
@@ -154,7 +174,7 @@ class Layout extends React.Component {
                                 className={classes.title}
                                 title={this.props.title}
                             >
-                          Selva Mary. G
+                                Selva Mary. G
                             </Typography>
                             <IconButton color="inherit"
                                 aria-label="Open drawer"

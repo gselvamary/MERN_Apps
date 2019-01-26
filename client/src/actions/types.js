@@ -16,3 +16,18 @@ export const GET_DEPTS = 'GET_DEPTS';
 export const REGISTER_DEPT = 'REGISTER_DEPT';
 export const DELETE_DEPT = 'DELETE_DEPT';
 export const DEPTS_LOADING = 'DEPTS_LOADING';
+
+
+
+
+//    /Sessions
+export const REGISTER_SESSIONS = 'REGISTER_SESSIONS';
+export const SESSIONS_LOADING = 'SESSIONS_LOADING';
+export const GET_SESSIONS = 'GET_SESSIONS';
+
+
+
+
+//Authentication
+export const GET_ERRORS = "GET_ERRORS";
+export const SET_CURRENT_USER = "SET_CURRENT_USER";

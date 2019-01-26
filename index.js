@@ -8,28 +8,33 @@ const app = express();
 
 const users = require('./routes/user/info');
 const depts = require('./routes/dept/info');
-
-
-
-const connect = require('./config/keys');
-/*
-// connects our back end code with the database
-mongoose.connect(
-  dbRoute,
-  { useNewUrlParser: true }
+const sessions = require('./routes/session/info');
+const passport = require("passport");
+// DB Config
+const db = require("./config/keys").mongoURI;
+// Connect to MongoDB
+mongoose
+  .connect(
+    db,
+    { useNewUrlParser: true }
+  )
+  .then(() => console.log("MongoDB successfully connected"))
+  .catch(err => console.log(err));
+app.use(
+  bodyParser.urlencoded({
+    extended: false
+  })
 );
-
-let db = mongoose.connection;
-
-db.once("open", () => console.log(`Connected to the Database ${dbRoute}`));
-
-// checks if connection with the database is successful
-db.on("error", console.error.bind(console, "MongoDB connection error:"));
-*/
 app.use(bodyParser.json());
 app.use('/users', users);
 app.use('/depts', depts);
+app.use('/sessions', sessions);
 
+// Passport middleware
+app.use(passport.initialize());
+
+// Passport config
+require("./config/passport")(passport);
 
 // Serve static assets if in production
 if (process.env.NODE_ENV === 'production') {

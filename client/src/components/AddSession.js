@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getUsers, deleteUser, registerUser } from '../actions/userActions';
-import { getDepts } from '../actions/deptActions';
+import { getSessions, registerSession } from '../actions/sessionActions';
 import PropTypes from 'prop-types';
 import ButtonAppBar from './ButtonAppBar';
 import Input from './Input'
@@ -56,9 +55,7 @@ class AddSession extends Component {
 
 
     componentDidMount() {
-        this.props.getUsers();
-        this.props.getDepts();
-
+        this.props.getSessions();
     };
     handleChange = (e) => {
         this.setState({
@@ -66,52 +63,31 @@ class AddSession extends Component {
         });
 
     };
-    onSelect = event => {
-        this.setState({ dept_id: event.target.value });
-    };
-    onDismiss = () => {
-        this.setState({ visible: false });
-    }
-
-    handleToggle = () => {
-        this.setState({
-            dropdownOpen: !this.state.dropdownOpen
-        });
-    };
-    toggle = () => {
-        this.setState({
-            visible: !this.state.visible
-        });
-    };
-
 
     onSubmit = e => {
         e.preventDefault();
-        const newUser = {
-            regno: this.state.regno,
-            fname: this.state.fname,
-            lname: this.state.lname,
-            password: this.state.password,
-            dept_id: this.state.dept_id,
-            email: this.state.email,
-            mobile: this.state.mobile,
+        const newSession = {
+            session1: this.state.session1,
+            session2: this.state.session2,
+            session3: this.state.session3,
+            session4: this.state.session4,
+            session5: this.state.session5,
+            session6: this.state.session6,
+            session7: this.state.session7,
+            session8: this.state.session8,
+            session9: this.state.session9,
+            session10: this.state.session10,
+
         }
+        alert(this.state.session1 + this.state.session6);
         //Add user via registerUser:
-        this.props.registerUser(newUser);
-
-        // alert(this.state.regno + this.state.fname + this.state.lname + this.state.password + this.state.dept_id + this.state.email + this.state.mobile)
-        //   alert("User Registration is Successful");
+        this.props.registerSession(newSession);
 
     };
-    onClick = () => {
-        alert(this.state.regno)
-    }
-    onDeleteClick = id => {
-        this.props.deleteUser(id);
 
-    };
 
     render() {
+        const { sessions } = this.props.session;
         const { classes } = this.props;
         return (
             <div>
@@ -126,10 +102,11 @@ class AddSession extends Component {
                         <Typography component="h1" variant="h5">
                             Session Name
             </Typography>
+
                         <form className={classes.form} onSubmit={this.onSubmit}>
                             <Grid container spacing={24}>
                                 <Grid item sm={6} xs={12}>
-                                    <Input id="session1" name="session1" label="Session 1" onChange={this.handleChange} />
+                                    <Input id="session1" name="session1" value ={this.state.session1} label="Session 1" onChange={this.handleChange} />
                                 </Grid>
                                 <Grid item sm={6} xs={12}>
                                     <Input id="session2" name="session2" label="Session 2" onChange={this.handleChange} />
@@ -164,6 +141,7 @@ class AddSession extends Component {
                             <MyButton sm={6} xs={12} type="submit" onClick={this.onSubmit} fullWidth variant="contained" className={classes.submit} label="Add Session" />
 
                             <br></br> </form>
+                          
                     </Paper>
                 </main>
             </div>
@@ -173,20 +151,17 @@ class AddSession extends Component {
 
 
 AddSession.propTypes = {
-    getUsers: PropTypes.func.isRequired,
-    user: PropTypes.object.isRequired,
-    deleteUser: PropTypes.func.isRequired,
-    registerUser: PropTypes.func.isRequired,
-    getDepts: PropTypes.func.isRequired,
+    getSessions: PropTypes.func.isRequired,
+    session: PropTypes.object.isRequired,
+    registerSession: PropTypes.func.isRequired,
     classes: PropTypes.object,
 };
 
 const mapStateToProps = state => ({
-    user: state.user,
-    dept: state.dept
+    session: state.session
 });
 
 export default connect(
     mapStateToProps,
-    { getUsers, deleteUser, registerUser, getDepts }
+    { getSessions, registerSession }
 )(withStyles(styles)(AddSession));

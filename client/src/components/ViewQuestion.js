@@ -190,133 +190,133 @@ let EnhancedTableToolbar = props => {
                 Questions Section
           </Typography>
 
-                <Toolbar
-                    className={classNames(classes.root, {
-                        [classes.highlight]: numSelected > 0,
-                    })}
-                >
-                    <div className={classes.title}>
+            <Toolbar
+                className={classNames(classes.root, {
+                    [classes.highlight]: numSelected > 0,
+                })}
+            >
+                <div className={classes.title}>
 
-                        {numSelected > 0 ? (
-                            <Typography color="inherit" variant="subtitle1">
-                                {numSelected} selected
+                    {numSelected > 0 ? (
+                        <Typography color="inherit" variant="subtitle1">
+                            {numSelected} selected
           </Typography>
-                        ) : (
-                                <Typography variant="h6" id="tableTitle">
-                                    View Questions
+                    ) : (
+                            <Typography variant="h6" id="tableTitle">
+                                View Questions
           </Typography>
-                            )}
-                    </div>
-                    <div className={classes.spacer} />
-                    <div className={classes.actions}>
-                        {numSelected > 0 ? (
-                            <Tooltip title="Delete">
-                                <IconButton aria-label="Delete">
-                                    <DeleteIcon />
+                        )}
+                </div>
+                <div className={classes.spacer} />
+                <div className={classes.actions}>
+                    {numSelected > 0 ? (
+                        <Tooltip title="Delete">
+                            <IconButton aria-label="Delete">
+                                <DeleteIcon />
+                            </IconButton>
+                        </Tooltip>
+                    ) : (
+                            <Tooltip title="Filter list">
+                                <IconButton aria-label="Filter list">
+                                    <FilterListIcon />
                                 </IconButton>
                             </Tooltip>
-                        ) : (
-                                <Tooltip title="Filter list">
-                                    <IconButton aria-label="Filter list">
-                                        <FilterListIcon />
-                                    </IconButton>
-                                </Tooltip>
-                            )}
-                    </div>
-                </Toolbar>
-    </div>
-            );
-        };
-        
-EnhancedTableToolbar.propTypes = {
-                classes: PropTypes.object.isRequired,
-            numSelected: PropTypes.number.isRequired,
-        };
-        
-        EnhancedTableToolbar = withStyles(toolbarStyles)(EnhancedTableToolbar);
-        
-const styles = theme => ({
-                root: {
-                width: '100%',
-            marginTop: theme.spacing.unit * 3,
-        },
-    table: {
-                minWidth: 1020,
-        },
-    tableWrapper: {
-                overflowX: 'auto',
-        },
-    });
-    
-class EnhancedTable extends React.Component {
-                state = {
-                    order: 'asc',
-                    orderBy: 'srno',
-                    selected: [],
-                    data: [
-                        createData(120, 1, 'Question1', 'Session1'),
-                        createData(121, 1, 'Question2', 'Session1'),
-                    ],
-                    page: 0,
-                    rowsPerPage: 5,
-                };
+                        )}
+                </div>
+            </Toolbar>
+        </div>
+    );
+};
 
-            handleRequestSort = (event, property) => {
+EnhancedTableToolbar.propTypes = {
+    classes: PropTypes.object.isRequired,
+    numSelected: PropTypes.number.isRequired,
+};
+
+EnhancedTableToolbar = withStyles(toolbarStyles)(EnhancedTableToolbar);
+
+const styles = theme => ({
+    root: {
+        width: '100%',
+        marginTop: theme.spacing.unit * 3,
+    },
+    table: {
+        minWidth: 1020,
+    },
+    tableWrapper: {
+        overflowX: 'auto',
+    },
+});
+
+class EnhancedTable extends React.Component {
+    state = {
+        order: 'asc',
+        orderBy: 'srno',
+        selected: [],
+        data: [
+            createData(120, 1, 'Question1', 'Session1'),
+            createData(121, 1, 'Question2', 'Session1'),
+        ],
+        page: 0,
+        rowsPerPage: 5,
+    };
+
+    handleRequestSort = (event, property) => {
         const orderBy = property;
-            let order = 'desc';
-    
+        let order = 'desc';
+
         if (this.state.orderBy === property && this.state.order === 'desc') {
-                order = 'asc';
-            }
-    
-        this.setState({order, orderBy });
-        };
-    
+            order = 'asc';
+        }
+
+        this.setState({ order, orderBy });
+    };
+
     handleSelectAllClick = event => {
         if (event.target.checked) {
-                this.setState(state => ({ selected: state.data.map(n => n.id) }));
+            this.setState(state => ({ selected: state.data.map(n => n.id) }));
             return;
         }
-        this.setState({selected: [] });
-        };
-    
+        this.setState({ selected: [] });
+    };
+
     handleClick = (event, id) => {
-        const {selected} = this.state;
-            const selectedIndex = selected.indexOf(id);
-            let newSelected = [];
-    
+        const { selected } = this.state;
+        const selectedIndex = selected.indexOf(id);
+        let newSelected = [];
+
         if (selectedIndex === -1) {
-                newSelected = newSelected.concat(selected, id);
-            } else if (selectedIndex === 0) {
-                newSelected = newSelected.concat(selected.slice(1));
-            } else if (selectedIndex === selected.length - 1) {
-                newSelected = newSelected.concat(selected.slice(0, -1));
-            } else if (selectedIndex > 0) {
-                newSelected = newSelected.concat(
-                    selected.slice(0, selectedIndex),
-                    selected.slice(selectedIndex + 1),
-                );
-            }
-    
-        this.setState({selected: newSelected });
-        };
-    
+            newSelected = newSelected.concat(selected, id);
+        } else if (selectedIndex === 0) {
+            newSelected = newSelected.concat(selected.slice(1));
+        } else if (selectedIndex === selected.length - 1) {
+            newSelected = newSelected.concat(selected.slice(0, -1));
+        } else if (selectedIndex > 0) {
+            newSelected = newSelected.concat(
+                selected.slice(0, selectedIndex),
+                selected.slice(selectedIndex + 1),
+            );
+        }
+
+        this.setState({ selected: newSelected });
+    };
+
     handleChangePage = (event, page) => {
-                this.setState({ page });
-            };
-        
+        this.setState({ page });
+    };
+
     handleChangeRowsPerPage = event => {
-                this.setState({ rowsPerPage: event.target.value });
-            };
-        
-            isSelected = id => this.state.selected.indexOf(id) !== -1;
-        
+        this.setState({ rowsPerPage: event.target.value });
+    };
+
+    isSelected = id => this.state.selected.indexOf(id) !== -1;
+
     render() {
-        const {classes} = this.props;
-        const {data, order, orderBy, selected, rowsPerPage, page } = this.state;
-            const emptyRows = rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);
-    
-            return (
+        const { classes } = this.props;
+        const { data, order, orderBy, selected, rowsPerPage, page } = this.state;
+        const emptyRows = rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);
+
+        return (
             <Paper className={classes.root}>
                 <EnhancedTableToolbar numSelected={selected.length} />
                 <div className={classes.tableWrapper}>
@@ -381,12 +381,12 @@ class EnhancedTable extends React.Component {
                     onChangeRowsPerPage={this.handleChangeRowsPerPage}
                 />
             </Paper>
-            );
-        }
+        );
     }
-    
+}
+
 EnhancedTable.propTypes = {
-                classes: PropTypes.object.isRequired,
-        };
-        
+    classes: PropTypes.object.isRequired,
+};
+
 export default withStyles(styles)(EnhancedTable);

@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 // Create Schema
 const UserSchema = new Schema({
   regno: {
-    type: Number,
+    type: String,
     required: true
   },
   fname: {
@@ -31,7 +31,7 @@ const UserSchema = new Schema({
     type: Number,
     required: true
   }
-  
+
 });
 
 module.exports = User = mongoose.model('user', UserSchema);

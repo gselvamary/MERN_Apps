@@ -40,42 +40,43 @@ function Home(props) {
     <div className={classes.main}>
       <h3 alignItems='centre'>Home</h3>
       <List component="nav" className={classes.root}>
-      <Link style={{ textDecoration: 'none' }} to="/addsession" >
-        <ListItem button>
-       
-          <ListItemText primary="Add/Update Session" />
-          <ListItemIcon>
-            <SendIcon></SendIcon>
-          </ListItemIcon>
-     
-        </ListItem>
+        <Link style={{ textDecoration: 'none' }} to="/addsession" >
+          <ListItem button>
+
+            <ListItemText primary="Add/Update Session" />
+            <ListItemIcon>
+              <SendIcon></SendIcon>
+            </ListItemIcon>
+
+          </ListItem>
         </Link>
         <Divider />
         <Link style={{ textDecoration: 'none' }} to="/addquestion" >
-        <ListItem button divider>
-          <ListItemText primary="Add Question" />
-          <ListItemIcon>
-            <SendIcon></SendIcon>
-          </ListItemIcon>
-        </ListItem>
+          <ListItem button divider>
+            <ListItemText primary="Add Question" />
+            <ListItemIcon>
+              <SendIcon></SendIcon>
+            </ListItemIcon>
+          </ListItem>
         </Link>
         <Link style={{ textDecoration: 'none' }} to="/update" >
-        <ListItem button>
-          <ListItemText primary="Update Question" />
-          <ListItemIcon>
-            <SendIcon></SendIcon>
-          </ListItemIcon>
-        </ListItem>
+          <ListItem button>
+            <ListItemText primary="Update Question" />
+            <ListItemIcon>
+              <SendIcon></SendIcon>
+            </ListItemIcon>
+          </ListItem>
         </Link>
         <Divider light />
         <Link style={{ textDecoration: 'none' }} to="/addfaculty" >
-        <ListItem button>
-          <ListItemText primary="Add Faculty to Course" />
-          <ListItemIcon>
-            <SendIcon></SendIcon>
-          </ListItemIcon>
-        </ListItem>
+          <ListItem button>
+            <ListItemText primary="Add Faculty to Course" />
+            <ListItemIcon>
+              <SendIcon></SendIcon>
+            </ListItemIcon>
+          </ListItem>
         </Link>
+        <Divider light />
         <Divider light />
         <ListItem button>
           <ListItemText primary="Reports" />
